@@ -1,12 +1,21 @@
 {
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"],
   "compilerOptions": {
-    "outDir": "./dist/",
+    // "rootDir": "src",
+    "outDir": "./dist/cjs",
     "noImplicitAny": true,
     "declaration": true,
+    "declarationDir": "./dist/types",
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "context-injector": ["./src/index"]
+    }
   }
 }

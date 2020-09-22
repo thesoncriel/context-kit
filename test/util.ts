@@ -1,5 +1,3 @@
-export const nop = () => {};
-
 /**
  * 특정 시간이 지난 후 비동기로 특정 값을 전달 한다.
  * @param time 경과 할 시간 (ms)

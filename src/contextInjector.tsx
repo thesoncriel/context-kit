@@ -12,7 +12,6 @@ import {
   ContextInteractor,
   ContextState,
 } from './models';
-import { nop } from './util';
 
 /**
  * 상태 관리에 이용할 컨텍스트와 이를 이용하기 위한 각종 컴포넌트와 훅(hooks)을 만들어서 제공한다.
@@ -26,7 +25,7 @@ export function contextInjector<T, IT>(
   interactor: ContextInteractor<T, IT>,
 ): ContextInjectorResult<T, IT> {
   const InjectedContext = createContext<ContextState<T>>({
-    dispatch: nop,
+    dispatch: () => {},
     state: initState,
   });
   const ContextProvider = InjectedContext.Provider;

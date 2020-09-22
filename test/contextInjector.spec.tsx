@@ -3,8 +3,8 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 
-import { contextInjector } from './contextInjector';
-import { timeout } from '../../util';
+import contextInjector from 'context-injector';
+import { timeout } from './util';
 
 interface TestCompProps {
   name: string;
@@ -138,7 +138,7 @@ const sampleInteractor = (
 
 const ctxSample = contextInjector(getInitInterTestState(), sampleInteractor);
 
-const HeroItem: FC<TestCompProps> = props => {
+const HeroItem: FC<TestCompProps> = (props) => {
   return <li>{getHeroItemStr(props)}</li>;
 };
 
@@ -467,11 +467,11 @@ describe('context injector', () => {
         );
       }
 
-      cases.forEach(args => test(...args));
+      cases.forEach((args) => test(...args));
     });
 
     it('여러곳에서 dispatch 가 연속으로 이뤄져도 의도대로 상태가 변경되어 있다.', () => {
-      cases.forEach(args => mountTarget.find(args[0]).simulate('click', {}));
+      cases.forEach((args) => mountTarget.find(args[0]).simulate('click', {}));
 
       const childName = mountTarget.find('.name');
       const childAge = mountTarget.find('.age');
@@ -487,7 +487,7 @@ describe('context injector', () => {
   });
 
   describe('interactor 기본 테스트', () => {
-    it('interactor 를 이용하여 자료를 로드 하면 전체 요소에 반영된다.', async done => {
+    it('interactor 를 이용하여 자료를 로드 하면 전체 요소에 반영된다.', async (done) => {
       const ID = 'heroes';
       const TestContainer = ctxSample.withCtx(HeroesContainer);
 
@@ -517,7 +517,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('interactor 를 이용하여 자료를 변경 하면 반영된다.', async done => {
+    it('interactor 를 이용하여 자료를 변경 하면 반영된다.', async (done) => {
       const ID = 'heroes';
       const mockItem = {
         age: 29,
@@ -556,7 +556,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('interactor 가 동기적 함수여도 제대로 수행된다.', async done => {
+    it('interactor 가 동기적 함수여도 제대로 수행된다.', async (done) => {
       const interTest = (
         getState: () => InterTestState,
         dispatch: (state: Partial<InterTestState>) => void,
@@ -690,7 +690,7 @@ describe('context injector', () => {
       mockWarn.mockRestore();
     });
 
-    it('업데이트를 연속 4번 했을 때 의도대로 변경 된다.', async done => {
+    it('업데이트를 연속 4번 했을 때 의도대로 변경 된다.', async (done) => {
       let target = mountTarget;
 
       await act(async () => {
@@ -732,7 +732,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('종류가 다른 업데이트를 여러번 하여도 의도대로 변경 된다.', async done => {
+    it('종류가 다른 업데이트를 여러번 하여도 의도대로 변경 된다.', async (done) => {
       let target = mountTarget;
 
       await act(async () => {
@@ -771,18 +771,8 @@ describe('context injector', () => {
       expect(heroItems2.at(1).text()).toEqual(getHeroItemStr(mockItems[1]));
       expect(heroItems2.at(2).text()).toEqual(getHeroItemStr(sampleList[2]));
 
-      expect(
-        valueCont1
-          .find('div')
-          .at(0)
-          .text(),
-      ).toEqual('-1');
-      expect(
-        valueCont2
-          .find('div')
-          .at(0)
-          .text(),
-      ).toEqual('-1');
+      expect(valueCont1.find('div').at(0).text()).toEqual('-1');
+      expect(valueCont2.find('div').at(0).text()).toEqual('-1');
 
       await act(async () => {
         await timeout(400);
@@ -805,7 +795,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('unmount 후 dispatch 명령은 무시된다.', async done => {
+    it('unmount 후 dispatch 명령은 무시된다.', async (done) => {
       let target = mountTarget;
 
       await act(async () => {
@@ -836,7 +826,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('provider 를 여러번 쓸 경우 경고를 띄운다.', async done => {
+    it('provider 를 여러번 쓸 경우 경고를 띄운다.', async (done) => {
       const spy = jest.spyOn(console, 'warn');
       const ctx = contextInjector(getInitCtxState(), () => ({}));
       const Container1 = ctx.withCtx(HeroesContainer);
@@ -861,7 +851,7 @@ describe('context injector', () => {
       done();
     });
 
-    it('context 를 사용치 않는데 interactor 를 호출하면 경고를 띄운다.', async done => {
+    it('context 를 사용치 않는데 interactor 를 호출하면 경고를 띄운다.', async (done) => {
       const spy = jest.spyOn(console, 'warn');
       const ctx = contextInjector(
         getInitCtxState(),
