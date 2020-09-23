@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["./test/**/*"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "context-injector": ["./src/index"]
+    }
+  }
+}

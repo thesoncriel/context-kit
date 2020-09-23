@@ -1,11 +1,11 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"],
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx"],
   "compilerOptions": {
-    // "rootDir": "src",
     "outDir": "./dist/cjs",
     "noImplicitAny": true,
     "declaration": true,
+    "removeComments": false,
     "declarationDir": "./dist/types",
     "module": "es6",
     "target": "es5",

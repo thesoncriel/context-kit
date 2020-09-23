@@ -25,6 +25,7 @@ export function contextInjector<T, IT>(
   interactor: ContextInteractor<T, IT>,
 ): ContextInjectorResult<T, IT> {
   const InjectedContext = createContext<ContextState<T>>({
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     dispatch: () => {},
     state: initState,
   });
