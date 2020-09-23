@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "context-injector": ["./src/index"]
+      "context-injector": ["src/index"]
     }
   }
 }
