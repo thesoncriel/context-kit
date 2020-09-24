@@ -8,7 +8,7 @@ export function timeout<T = void>(
   time: number,
   value?: T,
   stopCallback?: (stop: () => void) => void,
-) {
+): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const t = setTimeout(() => resolve(value), time);
 
