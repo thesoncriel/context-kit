@@ -135,7 +135,6 @@ export function contextInjector<T, IT>(
   const clone = () => contextInjector(initState, interactor);
 
   return {
-    CtxProvider,
     useCtxDispatch,
     useCtxSelector,
     useCtxSelectorAll,

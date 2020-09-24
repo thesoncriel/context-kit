@@ -27,13 +27,9 @@ export interface ContextState<T> {
  */
 export interface ContextInjectorResult<T, IT> {
   /**
-   * 상태 값을 제공하는 컴포넌트.
-   *
-   * 상태 관리를 하고싶은 컴포넌트를 감싸서 사용한다.
-   *
-   * 만약 직접 사용이 아닌 hoc 로 사용하고 싶다면 withCtx 를 이용한다.
+   * 컨텍스트용 디스패치. 변경된 상태 전체를 넘기면 컨텍스트에 반영된다.
    */
-  CtxProvider: FC;
+  useCtxDispatch: () => Dispatch<Partial<T>>;
   /**
    * HOC: 컨텍스트를 Decorator 형식으로 이용 할 수 있다.
    */
@@ -46,10 +42,6 @@ export interface ContextInjectorResult<T, IT> {
    * 컨텍트스용 셀렉터. 해당 컨텍스트의 모든 상태값을 가져올 수 있다.
    */
   useCtxSelectorAll: () => T;
-  /**
-   * 컨텍스트용 디스패치. 변경된 상태 전체를 넘기면 컨텍스트에 반영된다.
-   */
-  useCtxDispatch: () => Dispatch<Partial<T>>;
   /**
    * 컨텍스트용 인터렉터. 액션 및 데이터 호출, 조작 및 디스패치등의 기능을 가진 객체를 가져와 사용할 수 있다.
    */
