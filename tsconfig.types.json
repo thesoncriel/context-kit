@@ -1,11 +1,12 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
+    "module": "es2015",
     "target": "esnext",
     "removeComments": false,
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": ""
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist/types"
   }
 }

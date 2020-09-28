@@ -3,6 +3,8 @@
   "include": ["./**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "module": "es6",
+    "target": "es5",
     "baseUrl": "../",
     "paths": {
       "context-injector": ["src/index"]

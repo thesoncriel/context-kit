@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/cjs/index.js",
+  "module": "./dist/esm5/index.js",
   "types": "./dist/types/index.d.ts",
   "scripts": {
-    "compile": "tsc -b tsconfig.json",
-    "build": "npm-run-all clean compile",
+    "compile:esm5": "tsc -b tsconfig.esm5.json",
+    "compile:cjs": "tsc -b tsconfig.cjs.json",
+    "compile:types": "tsc -b tsconfig.types.json",
+    "build": "npm-run-all clean compile:cjs compile:esm5 compile:types",
     "clean": "rimraf dist",
     "lint": "eslint ./src/*",
     "test": "jest",
@@ -60,8 +63,5 @@
     "src",
     "README.md",
     "tsconfig.json"
-  ],
-  "jest": {
-    "verbose": true
-  }
+  ]
 }

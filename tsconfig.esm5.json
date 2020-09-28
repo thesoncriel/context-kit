@@ -3,8 +3,9 @@
   "compilerOptions": {
     "noEmit": false,
     "sourceMap": true,
-    "module": "commonjs",
+    "importHelpers": true,
+    "module": "esnext",
     "target": "es5",
-    "outDir": "./dist/cjs"
+    "outDir": "./dist/esm5"
   }
 }
