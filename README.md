@@ -1,4 +1,4 @@
-# Context Injector
+# Context Kit
 
 React 의 Context API 를 이용하여 비동기 side-effect 처리기와 상태 관리기를 함께 사용할 수 있도록 보조하는 라이브러리 입니다.
 

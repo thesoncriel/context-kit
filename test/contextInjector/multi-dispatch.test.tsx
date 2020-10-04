@@ -1,4 +1,4 @@
-import contextInjector from 'context-injector';
+import contextInjector from 'context-kit';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React, { FC, useEffect } from 'react';

@@ -15,7 +15,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'context-injector.js',
+    filename: 'context-kit.js',
     path: path.resolve(__dirname, 'dist'),
   },
 };

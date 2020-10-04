@@ -3,7 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 
-import contextInjector, { compose } from 'context-injector';
+import contextInjector, { compose } from 'context-kit';
 import { timeout } from './util';
 
 Enzyme.configure({ adapter: new Adapter() });

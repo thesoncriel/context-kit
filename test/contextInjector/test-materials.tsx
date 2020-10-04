@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { FC, Dispatch } from 'react';
 import { timeout } from '../util';
-import contextInjector from 'context-injector';
+import contextInjector from 'context-kit';
 
 export interface TestCompProps {
   name: string;

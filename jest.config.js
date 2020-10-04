@@ -5,6 +5,6 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
   moduleNameMapper: {
-    'context-injector': '<rootDir>/src/index',
+    'context-kit': '<rootDir>/src/index',
   },
 };

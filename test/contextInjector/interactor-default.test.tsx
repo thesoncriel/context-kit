@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import Adapter from 'enzyme-adapter-react-16';
-import contextInjector from 'context-injector';
+import contextInjector from 'context-kit';
 import {
   getInitCtxState,
   ctxSample,

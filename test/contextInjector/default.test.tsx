@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import contextInjector from 'context-injector';
+import contextInjector from 'context-kit';
 import { getInitCtxState, TestComp, CtxState } from './test-materials';
 
 Enzyme.configure({ adapter: new Adapter() });
