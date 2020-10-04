@@ -2,10 +2,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "importHelpers": true,
     "module": "esnext",
     "target": "es5",
-    "outDir": "./dist/esm5"
+    "outDir": "./esm5"
   }
 }

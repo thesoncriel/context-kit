@@ -7,7 +7,6 @@
 .idea
 .npm
 node_modules/
-src/
 test/
 .eslintrc.json
 .prettierrc
