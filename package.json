@@ -1,7 +1,7 @@
 {
   "name": "context-injector",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0-beta.1",
+  "description": "React 에서 Context 를 쉽게 쓸 수 있도록 만든 라이브러리",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm5/index.js",
   "types": "./dist/types/index.d.ts",
@@ -25,7 +25,10 @@
     "flux"
   ],
   "author": "TheSON",
-  "license": "ISC",
+  "contributors": [
+    "Theson <theson@styleshare.kr>"
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/thesoncriel/context-injector/issues"
   },
