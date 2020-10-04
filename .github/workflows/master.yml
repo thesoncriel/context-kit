@@ -1,19 +1,19 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI Master & Release
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  pull_request:
-    branches: [release]
+  push:
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    name: npm package publish process
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -33,12 +33,10 @@ jobs:
       - name: npm install
         run: npm install
 
-      # Runs a single command using the runners shell
-      - name: Run a lint
-        run: npm run lint
-
-      - name: Run a test
-        run: npm run test
-
       - name: Run a build
         run: npm run build
+
+      - name: Run a npm publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
