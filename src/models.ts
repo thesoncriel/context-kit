@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, FC, ComponentType } from 'react';
  * 컨텍스트의 상태값을 바탕으로 업무 로직을 구성할 때 쓰이는 인터렉터(Interactor).
  */
 export interface ContextInteractor<S = any, E = any> {
-  (state: () => S, dispatch: Dispatch<Partial<S>>): E;
+  (dispatch: Dispatch<Partial<S>>, state: () => S): E;
 }
 
 /**

@@ -270,8 +270,8 @@ describe('interactor - 스트레스 테스트', () => {
     const ctx = contextInjector(
       getInitCtxState(),
       (
-        getState: () => CtxState,
         dispatch: (state: Partial<CtxState>) => void,
+        getState: () => CtxState,
       ) => ({
         setLoading(loading: boolean) {
           dispatch({
@@ -282,7 +282,6 @@ describe('interactor - 스트레스 테스트', () => {
       }),
     );
 
-    // const Container1 = ctx.withCtx(HeroesContainer);
     const TestContainer: FC = () => {
       const { loading } = ctx.useCtxSelectorAll();
       const inter = ctx.useInteractor();

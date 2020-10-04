@@ -109,7 +109,7 @@ describe('compose', () => {
     };
   }
 
-  const ctx0 = contextInjector(getInitTestProps(), (getState, dispatch) => ({
+  const ctx0 = contextInjector(getInitTestProps(), (dispatch, getState) => ({
     addAge(value: number) {
       dispatch({
         age: getState().age + value,
@@ -135,7 +135,7 @@ describe('compose', () => {
     };
   }
 
-  const ctx1 = contextInjector(getInitTestProps1(), (getState, dispatch) => ({
+  const ctx1 = contextInjector(getInitTestProps1(), (dispatch, getState) => ({
     changeLeo(value: number) {
       dispatch({
         leo: `${getState().leo}_${value}`,
@@ -165,7 +165,7 @@ describe('compose', () => {
     });
   }
 
-  const ctx2 = contextInjector(getInitTestProps2(), (getState, dispatch) => ({
+  const ctx2 = contextInjector(getInitTestProps2(), (dispatch, getState) => ({
     addBookName(name: string) {
       dispatch({
         bookNames: [...getState().bookNames, name],

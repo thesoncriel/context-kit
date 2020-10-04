@@ -92,8 +92,8 @@ describe('interactor - 기본 테스트', () => {
 
   it('interactor 가 동기적 함수여도 제대로 수행된다.', async (done) => {
     const interTest = (
-      getState: () => InterTestState,
       dispatch: (state: Partial<InterTestState>) => void,
+      getState: () => InterTestState,
     ) => ({
       noAsync(query: TestQuery) {
         dispatch({

@@ -113,7 +113,6 @@ export function contextInjector<T, IT>(
 
     if (cachedInteractor === null) {
       cachedInteractor = interactor(
-        () => cachedState || state,
         (currState: Partial<T>) => {
           if (!isAleadyUsed) {
             if (appConfig.development) {
@@ -127,6 +126,7 @@ export function contextInjector<T, IT>(
             ...currState,
           }));
         },
+        () => cachedState || state,
       );
     }
     return cachedInteractor;

@@ -12,20 +12,20 @@ import { Dispatch } from 'react';
  *   state,
  *   combineInteractors(
  *     combineInteractors(
- *       (state, dispatch) => ({
+ *       (dispatch, getState) => ({
  *         setHaha(haha: string) {
- *           dispatch({ ...state, haha });
+ *           dispatch({ haha });
  *         },
  *       }),
- *       (state, dispatch) => ({
+ *       (dispatch, getState) => ({
  *         setAge(age: number) {
- *           dispatch({ ...state, age });
+ *           dispatch({ age });
  *         },
  *       }),
  *     ),
- *     (state, dispatch) => ({
+ *     (dispatch, getState) => ({
  *       setYoung(young: boolean) {
- *         dispatch({ ...state, young });
+ *         dispatch({ young });
  *       },
  *     }),
  *   ),
@@ -43,8 +43,8 @@ export function combineInteractors<S, E1, E2>(
   inter1: ContextInteractor<S, E1>,
   inter2: ContextInteractor<S, E2>,
 ): ContextInteractor<S, E1 & E2> {
-  return (state: () => S, dispatch: Dispatch<Partial<S>>) => ({
-    ...inter1(state, dispatch),
-    ...inter2(state, dispatch),
+  return (dispatch: Dispatch<Partial<S>>, getState: () => S) => ({
+    ...inter1(dispatch, getState),
+    ...inter2(dispatch, getState),
   });
 }

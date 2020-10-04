@@ -83,8 +83,8 @@ export const sampleApi = {
 };
 
 export const sampleInteractor = (
-  state: () => InterTestState,
   dispatch: Dispatch<Partial<InterTestState>>,
+  state: () => InterTestState,
 ) => ({
   async loadHeroes() {
     try {
