@@ -6,9 +6,9 @@ React 의 Context API 를 이용하여 비동기 side-effect 처리기와 상태
 
 ## TODO
 
-- [v] npm 에 올려보기
-- [v] 기존 템플릿 라이브러리에 적용 시켜보기
-- [ ] ci 와 github 연동하여 test 및 라이브러리 배포 자동화
+- [x] npm 에 올려보기
+- [x] 기존 템플릿 라이브러리에 적용 시켜보기
+- [x] ci 와 github 연동하여 test 및 라이브러리 배포 자동화
 - [ ] API 문서 보강
 - [ ] 테스트 페이지 만들어서 링크 하기
 - [ ] createInteractor 만들기
