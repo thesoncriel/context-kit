@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { FC, Dispatch } from 'react';
 import { timeout } from '../util';
-import contextInjector from 'context-kit';
+import { contextInjector } from 'context-kit';
 
 export interface TestCompProps {
   name: string;
@@ -37,14 +37,14 @@ export interface TestQuery {
   type?: string;
 }
 
-export interface InterTestState {
+export interface WorkerTestState {
   value: number;
   items: TestCompProps[];
   query?: TestQuery;
   loading: boolean;
 }
 
-export function getInitInterTestState(): InterTestState {
+export function getInitWorkerTestState(): WorkerTestState {
   return {
     items: [],
     loading: false,
@@ -82,9 +82,9 @@ export const sampleApi = {
   },
 };
 
-export const sampleInteractor = (
-  dispatch: Dispatch<Partial<InterTestState>>,
-  state: () => InterTestState,
+export const sampleWorker = (
+  dispatch: Dispatch<Partial<WorkerTestState>>,
+  state: () => WorkerTestState,
 ) => ({
   async loadHeroes() {
     try {
@@ -134,8 +134,8 @@ export const sampleInteractor = (
 });
 
 export const ctxSample = contextInjector(
-  getInitInterTestState(),
-  sampleInteractor,
+  getInitWorkerTestState(),
+  sampleWorker,
 );
 
 export const HeroItem: FC<TestCompProps> = (props) => {
@@ -186,11 +186,11 @@ export const HeroesContainer: FC<HeroesContainerProps> = ({
   onUpdateGetter,
   children,
 }) => {
-  const state = ctxSample.useCtxSelectorAll();
-  const inter = ctxSample.useInteractor();
+  const state = ctxSample.useSelectorAll();
+  const worker = ctxSample.useWorker();
 
   const handleLoad = () => {
-    void inter.loadHeroes();
+    void worker.loadHeroes();
   };
   const handleUpdate = () => {
     if (!onUpdateGetter) {
@@ -198,7 +198,7 @@ export const HeroesContainer: FC<HeroesContainerProps> = ({
     }
     const { index, item } = onUpdateGetter();
 
-    inter.updateHero(index, item);
+    worker.updateHero(index, item);
   };
 
   return (
@@ -216,14 +216,14 @@ export const HeroesContainer: FC<HeroesContainerProps> = ({
 };
 
 export const ValueContainer: FC<IdProps> = ({ id, children }) => {
-  const state = ctxSample.useCtxSelectorAll();
-  const inter = ctxSample.useInteractor();
+  const state = ctxSample.useSelectorAll();
+  const worker = ctxSample.useWorker();
 
   const handleValue = () => {
     if (state.value > 10) {
-      void inter.plusValue(-1);
+      void worker.plusValue(-1);
     } else {
-      void inter.plusValue(3);
+      void worker.plusValue(3);
     }
   };
 

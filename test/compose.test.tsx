@@ -3,7 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 
-import contextInjector, { compose } from 'context-kit';
+import { contextInjector, compose } from 'context-kit';
 import { timeout } from './util';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -193,21 +193,21 @@ describe('compose', () => {
     bookNameValue,
     salesCountValue,
   }) => {
-    const { name, age } = ctx0.useCtxSelectorAll();
-    const { leo } = ctx1.useCtxSelectorAll();
-    const { bookNames, salesCount } = ctx2.useCtxSelectorAll();
-    const inter0 = ctx0.useInteractor();
-    const inter1 = ctx1.useInteractor();
-    const inter2 = ctx2.useInteractor();
+    const { name, age } = ctx0.useSelectorAll();
+    const { leo } = ctx1.useSelectorAll();
+    const { bookNames, salesCount } = ctx2.useSelectorAll();
+    const worker0 = ctx0.useWorker();
+    const worker1 = ctx1.useWorker();
+    const worker2 = ctx2.useWorker();
 
     useEffect(() => {
-      inter0.addAge(ageValue || 0);
-      inter1.changeLeo(leoValue || 0);
-      inter2.addBookName(bookNameValue || '');
-    }, [inter0, inter1, inter2, ageValue, leoValue, bookNameValue]);
+      worker0.addAge(ageValue || 0);
+      worker1.changeLeo(leoValue || 0);
+      worker2.addBookName(bookNameValue || '');
+    }, [worker0, worker1, worker2, ageValue, leoValue, bookNameValue]);
 
     const handleClick = () => {
-      void inter2.setSalesCount(salesCountValue || 1);
+      void worker2.setSalesCount(salesCountValue || 1);
     };
 
     return (

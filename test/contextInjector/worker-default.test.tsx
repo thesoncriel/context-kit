@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import Adapter from 'enzyme-adapter-react-16';
-import contextInjector from 'context-kit';
+import { contextInjector } from 'context-kit';
 import {
   getInitCtxState,
   ctxSample,
@@ -12,16 +12,16 @@ import {
   HeroItem,
   getHeroItemStr,
   sampleList,
-  InterTestState,
+  WorkerTestState,
   TestQuery,
-  getInitInterTestState,
+  getInitWorkerTestState,
 } from './test-materials';
 import { timeout } from '../util';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('interactor - 기본 테스트', () => {
-  it('interactor 를 이용하여 자료를 로드 하면 전체 요소에 반영된다.', async (done) => {
+describe('worker - 기본 테스트', () => {
+  it('worker 를 이용하여 자료를 로드 하면 전체 요소에 반영된다.', async (done) => {
     const ID = 'heroes';
     const TestContainer = ctxSample.withCtx(HeroesContainer);
 
@@ -51,7 +51,7 @@ describe('interactor - 기본 테스트', () => {
     done();
   });
 
-  it('interactor 를 이용하여 자료를 변경 하면 반영된다.', async (done) => {
+  it('worker 를 이용하여 자료를 변경 하면 반영된다.', async (done) => {
     const ID = 'heroes';
     const mockItem = {
       age: 29,
@@ -90,10 +90,10 @@ describe('interactor - 기본 테스트', () => {
     done();
   });
 
-  it('interactor 가 동기적 함수여도 제대로 수행된다.', async (done) => {
+  it('worker 가 동기적 함수여도 제대로 수행된다.', async (done) => {
     const interTest = (
-      dispatch: (state: Partial<InterTestState>) => void,
-      getState: () => InterTestState,
+      dispatch: (state: Partial<WorkerTestState>) => void,
+      getState: () => WorkerTestState,
     ) => ({
       noAsync(query: TestQuery) {
         dispatch({
@@ -104,14 +104,14 @@ describe('interactor - 기본 테스트', () => {
         });
       },
     });
-    const ctx = contextInjector(getInitInterTestState(), interTest);
+    const ctx = contextInjector(getInitWorkerTestState(), interTest);
     const TestComponent: FC = () => {
-      const { query } = ctx.useCtxSelectorAll();
-      const inter = ctx.useInteractor();
+      const { query } = ctx.useSelectorAll();
+      const worker = ctx.useWorker();
 
       useEffect(() => {
-        inter.noAsync({ keyword: 'style', type: 'share' });
-      }, [inter]);
+        worker.noAsync({ keyword: 'style', type: 'share' });
+      }, [worker]);
 
       return (
         <div>

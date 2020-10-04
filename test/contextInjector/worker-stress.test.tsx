@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import Adapter from 'enzyme-adapter-react-16';
-import contextInjector from 'context-kit';
+import { contextInjector } from 'context-kit';
 import {
   ctxSample,
   CtxState,
@@ -20,7 +20,7 @@ import { timeout } from '../util';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('interactor - 스트레스 테스트', () => {
+describe('worker - 스트레스 테스트', () => {
   const ID = 'heroes';
   const ID2 = 'theson';
   const ID3 = 'google';
@@ -265,7 +265,7 @@ describe('interactor - 스트레스 테스트', () => {
     done();
   });
 
-  it('context 를 사용치 않는데 interactor 를 호출하면 경고를 띄운다.', async (done) => {
+  it('context 를 사용치 않는데 worker 를 호출하면 경고를 띄운다.', async (done) => {
     const spy = jest.spyOn(console, 'warn');
     const ctx = contextInjector(
       getInitCtxState(),
@@ -283,12 +283,12 @@ describe('interactor - 스트레스 테스트', () => {
     );
 
     const TestContainer: FC = () => {
-      const { loading } = ctx.useCtxSelectorAll();
-      const inter = ctx.useInteractor();
+      const { loading } = ctx.useSelectorAll();
+      const worker = ctx.useWorker();
 
       useEffect(() => {
-        inter.setLoading(!loading);
-      }, [inter]);
+        worker.setLoading(!loading);
+      }, [worker]);
 
       return <div>{loading}</div>;
     };
