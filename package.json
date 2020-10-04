@@ -13,8 +13,7 @@
     "clean": "rimraf dist",
     "lint": "eslint ./src/*",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",

@@ -45,4 +45,6 @@ jobs:
         run: npm run build
 
       - name: Run a npm publish
-        run: npm publish --ignore-prepublish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
