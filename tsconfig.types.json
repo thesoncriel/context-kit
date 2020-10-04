@@ -7,6 +7,6 @@
     "declaration": true,
     "declarationMap": false,
     "emitDeclarationOnly": true,
-    "outFile": "./types/index.d.ts"
+    "outDir": "./types"
   }
 }
