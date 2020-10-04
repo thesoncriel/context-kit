@@ -1,6 +1,6 @@
 {
   "name": "context-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React 에서 Context 를 쉽게 쓸 수 있도록 만든 라이브러리",
   "main": "./cjs/index.js",
   "module": "./esm5/index.js",
