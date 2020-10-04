@@ -10,35 +10,61 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+  install:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         node_version: ['12']
         os: [ubuntu-latest]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: npm install
+      - name: Install packages
         run: npm install
+      # - name: Cache npm
+      #   uses: actions/cache@v2
+      #   env:
+      #     cache-name: npm
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: ${{ runner.os }}-cache-${{ env.cache-name }}-
 
-      # Runs a single command using the runners shell
-      - name: Run a lint
+  lint:
+    needs: install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['12']
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run eslint
         run: npm run lint
 
-      - name: Run a test
+  test:
+    needs: install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['12']
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test
         run: npm run test
 
-      - name: Run a build test
+  build:
+    needs: install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['12']
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run build
         run: npm run build
