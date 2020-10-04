@@ -79,16 +79,16 @@ export const SampleContainer = ctx.withCtx(() => {
     worker.loadList();
   };
 
+  if (loading) {
+    return <span>loading...</span>;
+  }
+
   if (list.length === 0) {
     return (
       <button type="button" onClick={handleClick}>
         Click to Load Posts
       </button>
     );
-  }
-
-  if (loading) {
-    return <span>loading...</span>;
   }
 
   return (
@@ -251,6 +251,8 @@ const nextCtx = contextInjector(
   combineWorkers(worker1, worker2),
 );
 ```
+
+> 이렇게 유틸리티를 별도 제공하나 Container 와 Worker 는 가급적 1:1 관계가 되도록 설계하여 작성하시길 권장합니다.
 
 ## 사용 시 주의
 
