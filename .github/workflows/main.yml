@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,8 +19,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: ['10', '12', '14']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node_version: ['12']
+        os: [ubuntu-latest]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,19 +30,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-      
+
       - name: npm install
         run: npm install
 
       # Runs a single command using the runners shell
       - name: Run a lint
         run: npm run lint
-        
+
       - name: Run a test
         run: npm run test
-        
+
       - name: Run a build
         run: npm run build
-        
+
       - name: Run a npm publish
         run: npm publish --ignore-prepublish
