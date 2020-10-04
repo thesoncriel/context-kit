@@ -1,4 +1,4 @@
-import contextInjector from 'context-kit';
+import { contextInjector } from 'context-kit';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React, { FC, useEffect } from 'react';
@@ -9,8 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('context injector - 멀티 디스패치', () => {
   const ctx = contextInjector(getInitCtxState(), () => ({}));
   const TestContainer: FC = () => {
-    const { name, age, likeCounts } = ctx.useCtxSelectorAll();
-    const dispatch = ctx.useCtxDispatch();
+    const { name, age, likeCounts } = ctx.useSelectorAll();
+    const dispatch = ctx.useDispatch();
 
     const handleClick = () => {
       dispatch({

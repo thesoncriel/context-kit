@@ -2,10 +2,10 @@
 import { Dispatch, SetStateAction, FC, ComponentType } from 'react';
 
 /**
- * 컨텍스트의 상태값을 바탕으로 업무 로직을 구성할 때 쓰이는 인터렉터(Interactor).
+ * 컨텍스트의 상태값을 바탕으로 업무 로직을 구성할 때 쓰이는 워커(Worker).
  */
-export interface ContextInteractor<S = any, E = any> {
-  (state: () => S, dispatch: Dispatch<Partial<S>>): E;
+export interface ContextWorker<S = any, E = any> {
+  (dispatch: Dispatch<Partial<S>>, state: () => S): E;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface ContextInjectorResult<T, IT> {
   /**
    * 컨텍스트용 디스패치. 변경된 상태 전체를 넘기면 컨텍스트에 반영된다.
    */
-  useCtxDispatch: () => Dispatch<Partial<T>>;
+  useDispatch: () => Dispatch<Partial<T>>;
   /**
    * HOC: 컨텍스트를 Decorator 형식으로 이용 할 수 있다.
    */
@@ -37,15 +37,15 @@ export interface ContextInjectorResult<T, IT> {
   /**
    * 컨텍스트용 셀렉터. 가져오고 싶은 데이터만 선택할 수 있다.
    */
-  useCtxSelector: <R>(selector: (state: T) => R) => R;
+  useSelector: <R>(selector: (state: T) => R) => R;
   /**
    * 컨텍트스용 셀렉터. 해당 컨텍스트의 모든 상태값을 가져올 수 있다.
    */
-  useCtxSelectorAll: () => T;
+  useSelectorAll: () => T;
   /**
-   * 컨텍스트용 인터렉터. 액션 및 데이터 호출, 조작 및 디스패치등의 기능을 가진 객체를 가져와 사용할 수 있다.
+   * 컨텍스트용 워커. 액션 및 데이터 호출, 조작 및 디스패치등의 기능을 가진 객체를 가져와 사용할 수 있다.
    */
-  useInteractor: () => IT;
+  useWorker: () => IT;
   /**
    * 컨텍스트 인젝터 결과물을 복사한다.
    *

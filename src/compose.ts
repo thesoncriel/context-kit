@@ -18,9 +18,9 @@ import { ContextInjectorResult } from './index';
  * )(NormalComponent);
  *
  * // contextInjector 결과물과 연계
- * const ctx0 = contextInjector(getInitState0(), interactor0());
- * const ctx1 = contextInjector(getInitState1(), interactor1());
- * const ctx2 = contextInjector(getInitState2(), interactor2());
+ * const ctx0 = contextInjector(getInitState0(), worker0());
+ * const ctx1 = contextInjector(getInitState1(), worker1());
+ * const ctx2 = contextInjector(getInitState2(), worker2());
  *
  * const EnhancedContainer = compose(
  *   ctx0, ctx1, ctx2

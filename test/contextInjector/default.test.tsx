@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import contextInjector from 'context-kit';
+import { contextInjector } from 'context-kit';
 import { getInitCtxState, TestComp, CtxState } from './test-materials';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('context injector - 기본 기능', () => {
   const ctx = contextInjector(getInitCtxState(), () => ({}));
   const TestContainer: FC = () => {
-    const state = ctx.useCtxSelectorAll();
+    const state = ctx.useSelectorAll();
 
     return <TestComp {...state} />;
   };
@@ -38,13 +38,13 @@ describe('context injector - 기본 기능', () => {
     expect(childResult.props()).toEqual(getInitCtxState());
   });
 
-  it('useCtxSelector 사용 시 상태값을 원하는 값으로 변환하여 줄 수 있다.', () => {
+  it('useSelector 사용 시 상태값을 원하는 값으로 변환하여 줄 수 있다.', () => {
     const ctxSub = contextInjector(getInitCtxState(), () => ({}));
     const selIsOldBoy = jest.fn((state: CtxState) => {
       return state.age > 30;
     });
     const SubTestContainer: FC = () => {
-      const isOldBoy = ctxSub.useCtxSelector(selIsOldBoy);
+      const isOldBoy = ctxSub.useSelector(selIsOldBoy);
 
       return <h1>나는 {isOldBoy ? '영감탱 ㅠㅠ' : '아직 청년 ^.^)v'}</h1>;
     };
@@ -62,8 +62,8 @@ describe('context injector - 기본 기능', () => {
   it('dispatch 하여 상태값을 바꿀 수 있다.', () => {
     const ctxSub = contextInjector(getInitCtxState(), () => ({}));
     const SubTestContainer: FC = () => {
-      const state = ctxSub.useCtxSelectorAll();
-      const dispatch = ctxSub.useCtxDispatch();
+      const state = ctxSub.useSelectorAll();
+      const dispatch = ctxSub.useDispatch();
 
       const handleClick = () => {
         dispatch({
