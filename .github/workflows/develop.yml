@@ -1,14 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI Develop
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   pull_request:
     branches: [develop, master]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   install:
     runs-on: ${{ matrix.os }}
@@ -19,16 +14,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        env:
+          cache-name: npm
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-cache-${{ env.cache-name }}-
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: node_modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-cache-${{ env.cache-name }}-
+
       - name: Install packages
         run: npm install
-      # - name: Cache npm
-      #   uses: actions/cache@v2
-      #   env:
-      #     cache-name: npm
-      #   with:
-      #     path: ~/.npm
-      #     key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: ${{ runner.os }}-cache-${{ env.cache-name }}-
 
   lint:
     needs: install
@@ -40,6 +46,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Load node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: node_modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run eslint
         run: npm run lint
 
@@ -53,6 +68,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Load node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: node_modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run test
         run: npm run test
 
@@ -66,5 +90,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Load node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: node_modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run build
         run: npm run build
