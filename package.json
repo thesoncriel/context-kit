@@ -1,16 +1,16 @@
 {
   "name": "context-kit",
-  "version": "0.1.0-beta.12",
+  "version": "0.1.0-beta.13",
   "description": "React 에서 Context 를 쉽게 쓸 수 있도록 만든 라이브러리",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm5/index.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./cjs/index.js",
+  "module": "./esm5/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
     "compile:esm5": "tsc -b tsconfig.esm5.json",
     "compile:cjs": "tsc -b tsconfig.cjs.json",
     "compile:types": "tsc -b tsconfig.types.json",
     "build": "npm-run-all clean compile:cjs compile:esm5 compile:types",
-    "clean": "rimraf dist",
+    "clean": "rimraf cjs esm5 types",
     "lint": "eslint ./src/*",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -61,7 +61,10 @@
   },
   "dependencies": {},
   "files": [
-    "dist",
+    "cjs",
+    "esm5",
+    "types",
+    "src",
     "README.md"
   ]
 }

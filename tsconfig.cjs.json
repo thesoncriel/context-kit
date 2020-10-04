@@ -2,9 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "module": "commonjs",
     "target": "es5",
-    "outDir": "./dist/cjs"
+    "outDir": "./cjs"
   }
 }
