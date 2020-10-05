@@ -219,40 +219,7 @@ const Container: React.FC = () => {
 const ResultContainer = compose(ctx1, ctx2)(Container);
 ```
 
-#### combineWorkers
-
-아래와 같이 별도로 만들어진 워커 2개를 합쳐서 사용할 때 쓰입니다.
-
-관심사 분리나 소스코드 분할 등의 이유로 워커가 나눠졌을 때 유용합니다.
-
-```tsx
-import { contextInjector, combineWorkers } from 'context-kit';
-
-interface State {
-  name: string;
-  age: number;
-}
-
-const worker1 = (dispatch: (state: Partial<State>) => void) => ({
-  setName(name: string) {
-    dispatch({ name });
-  },
-});
-
-const worker2 = (dispatch: (state: Partial<State>) => void) => ({
-  setAge(age: number) {
-    dispatch({ age });
-  },
-});
-
-const nextCtx = contextInjector(
-  { name: '', age: 0 } as State,
-  // 두개의 워커를 결합
-  combineWorkers(worker1, worker2),
-);
-```
-
-> 이렇게 유틸리티를 별도 제공하나 Container 와 Worker 는 가급적 1:1 관계가 되도록 설계하여 작성하시길 권장합니다.
+> 이렇게 유틸리티를 별도 제공하나 Container 와 Context 는 가급적 1:1 관계가 되도록 설계하여 작성하시길 권장합니다.
 
 ## 사용 시 주의
 
@@ -261,6 +228,16 @@ Context API 는 그 특성상 같은 화면 내 다른 곳에서 중복되어 �
 때문에 만들어진 **CIR** 의 `withCtx` HOC 는 단 1곳에서만 사용되어야 합니다.
 
 만약 같은 화면 내 다른 여러곳에서 `withCtx` 를 남발하면, 마지막에 적용된 **Container Component** 에서만 상태값이 올바르게 동작 할 것입니다.
+
+## 여담
+
+만약 여러 페이지에서 상태가 유지되어야 한다면 [redux](https://redux.js.org/)를 사용하길 권장 드립니다.
+
+redux 는 세계적으로 널리 쓰이는 Flux Architecture 기반의 상태 관리자 라이브러리 이며, 강력한 middleware 가 탑재되어 있으므로 side-effect 처리에도 탁월 합니다.
+
+**Context Kit** 은 국소적인 영역의 상태 관리자가 필요할 때만 사용하세요!
+
+참고로 작성자 본인도 redux 애호가 입니다. 😊
 
 ## Special Thanks To
 
